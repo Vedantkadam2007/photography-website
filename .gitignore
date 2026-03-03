@@ -102,6 +102,10 @@ Thumbs.db
 /backend/uploads/*
 !/backend/uploads/.gitkeep
 
+# Data directory (for file-based storage)
+/backend/data/*
+!/backend/data/.gitkeep
+
 # MongoDB
 *.db
 *.sqlite

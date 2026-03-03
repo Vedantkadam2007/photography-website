@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Upload, CheckCircle, AlertCircle } from 'lucide-react';
+import { Upload as UploadIcon, CheckCircle, AlertCircle } from 'lucide-react';
 
 const Upload = () => {
   const [formData, setFormData] = useState({
@@ -108,7 +108,7 @@ const Upload = () => {
             ) : (
               <div className="w-full h-64 bg-dark-card rounded-lg flex items-center justify-center border-2 border-dashed border-gray-600">
                 <div className="text-center">
-                  <Upload className="h-12 w-12 text-gray-400 mx-auto mb-2" />
+                  <UploadIcon className="h-12 w-12 text-gray-400 mx-auto mb-2" />
                   <p className="text-gray-400">No image selected</p>
                 </div>
               </div>

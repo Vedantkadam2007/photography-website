@@ -5,6 +5,9 @@ import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import PhotoDetail from './pages/PhotoDetail';
 import Upload from './pages/Upload';
+import Contact from './pages/Contact';
+import Portfolio from './pages/Portfolio';
+import Services from './pages/Services';
 import './App.css';
 
 function App() {
@@ -17,6 +20,9 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/photo/:id" element={<PhotoDetail />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/services" element={<Services />} />
         </Routes>
       </main>
     </div>
