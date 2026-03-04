@@ -8,6 +8,7 @@ import Upload from './pages/Upload';
 import Contact from './pages/Contact';
 import Portfolio from './pages/Portfolio';
 import Services from './pages/Services';
+import Booking from './pages/Booking';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/booking" element={<Booking />} />
         </Routes>
       </main>
     </div>

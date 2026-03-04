@@ -1,81 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Camera, Users, Briefcase, Heart, Star, Clock, CheckCircle, ArrowRight, Sparkles, Mail } from 'lucide-react';
+import { Camera, Users, Briefcase, Heart, Star, Clock, CheckCircle, ArrowRight, Sparkles, Mail, Calendar } from 'lucide-react';
 import Notification from '../components/Notification';
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [notification, setNotification] = useState(null);
-  const [showBookingForm, setShowBookingForm] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState(null);
-  const [userDetails, setUserDetails] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
 
-  const sendPackageEmail = (service, pkg) => {
-    setSelectedPackage({ service, pkg });
-    setShowBookingForm(true);
-  };
-
-  const submitBooking = () => {
-    if (!userDetails.name || !userDetails.email || !userDetails.phone) {
-      setNotification({
-        type: 'error',
-        message: 'Please fill in all required fields (Name, Email, Phone)'
-      });
-      setTimeout(() => setNotification(null), 3000);
-      return;
+  const goToBooking = (service, pkg) => {
+    const params = new URLSearchParams();
+    params.append('service', service.title);
+    if (pkg) {
+      params.append('package', pkg.name);
     }
-
-    const emailData = {
-      to: 'vedantkadam875@gmail.com',
-      subject: `📸 Package Booking - ${selectedPackage.pkg.name} - ${userDetails.name}`,
-      body: `
-        PACKAGE BOOKING from LUXE Photography Website
-        
-        Client Information:
-        Name: ${userDetails.name}
-        Email: ${userDetails.email}
-        Phone: ${userDetails.phone}
-        
-        Package Details:
-        Service: ${selectedPackage.service.title}
-        Package: ${selectedPackage.pkg.name}
-        Price: ${selectedPackage.pkg.price}
-        Duration: ${selectedPackage.pkg.duration}
-        
-        Features:
-        ${selectedPackage.pkg.features.map(feature => `• ${feature}`).join('\n')}
-        
-        Additional Message:
-        ${userDetails.message || 'No additional message'}
-        
-        ---
-        Booking submitted on: ${new Date().toLocaleString()}
-        
-        Please contact me to confirm this booking.
-      `
-    };
-
-    const mailtoLink = `mailto:vedantkadam875@gmail.com?subject=${encodeURIComponent(emailData.subject)}&body=${encodeURIComponent(emailData.body)}`;
-    window.open(mailtoLink, '_blank');
-
-    // Show success notification
-    setNotification({
-      type: 'success',
-      message: `📧 Booking sent! We'll contact you soon about your ${selectedPackage.pkg.name} package.`
-    });
-
-    // Reset form
-    setShowBookingForm(false);
-    setUserDetails({ name: '', email: '', phone: '', message: '' });
-    setSelectedPackage(null);
-
-    // Clear notification after 5 seconds
-    setTimeout(() => setNotification(null), 5000);
+    window.location.href = `/booking?${params.toString()}`;
   };
 
   const services = [
@@ -290,17 +228,18 @@ const Services = () => {
 
               <div className="space-y-3">
                 <button
-                  onClick={() => setSelectedService(service)}
+                  onClick={() => goToBooking(service)}
                   className="w-full py-3 bg-accent text-black rounded-lg hover:bg-accent-dark transition-all duration-300"
                 >
                   View Details
                 </button>
-                <Link
-                  to="/contact"
-                  className="block w-full text-center py-3 border border-accent text-accent rounded-lg hover:bg-accent hover:text-black transition-all duration-300"
+                <button
+                  onClick={() => goToBooking(service)}
+                  className="w-full py-3 border border-accent text-accent rounded-lg hover:bg-accent hover:text-black transition-all duration-300 flex items-center justify-center space-x-2"
                 >
-                  Book Now
-                </Link>
+                  <Calendar className="h-4 w-4" />
+                  <span>Book This Service</span>
+                </button>
               </div>
             </div>
           ))}
@@ -353,14 +292,14 @@ const Services = () => {
                 </ul>
 
                 <button
-                  onClick={() => sendPackageEmail(services[index], pkg)}
+                  onClick={() => goToBooking(services[index], pkg)}
                   className={`w-full text-center py-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
                     pkg.recommended
                       ? 'bg-accent text-black hover:bg-accent-dark'
                       : 'border border-accent text-accent hover:bg-accent hover:text-black'
                   }`}
                 >
-                  <Mail className="h-5 w-5" />
+                  <Calendar className="h-5 w-5" />
                   <span>Book This Package</span>
                 </button>
               </div>
@@ -467,102 +406,6 @@ const Services = () => {
                 Close
               </button>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Booking Form Modal */}
-      {showBookingForm && selectedPackage && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-6">
-          <div className="bg-dark-card rounded-3xl max-w-md w-full p-8 border border-accent border-opacity-30">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold heading-luxury">Book {selectedPackage.pkg.name}</h3>
-              <button
-                onClick={() => {
-                  setShowBookingForm(false);
-                  setSelectedPackage(null);
-                }}
-                className="p-2 rounded-lg hover:bg-accent hover:bg-opacity-20 transition-all duration-300"
-              >
-                ×
-              </button>
-            </div>
-
-            <div className="mb-6 p-4 bg-accent bg-opacity-10 rounded-lg">
-              <div className="text-sm text-gray-400 mb-2">Package Details:</div>
-              <div className="font-semibold text-accent">{selectedPackage.pkg.name}</div>
-              <div className="text-lg font-bold">{selectedPackage.pkg.price}</div>
-              <div className="text-sm text-gray-500">{selectedPackage.pkg.duration}</div>
-            </div>
-
-            <form onSubmit={(e) => { e.preventDefault(); submitBooking(); }} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2 text-accent">Name *</label>
-                <input
-                  type="text"
-                  value={userDetails.name}
-                  onChange={(e) => setUserDetails({...userDetails, name: e.target.value})}
-                  className="premium-input w-full"
-                  placeholder="Your full name"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2 text-accent">Email *</label>
-                <input
-                  type="email"
-                  value={userDetails.email}
-                  onChange={(e) => setUserDetails({...userDetails, email: e.target.value})}
-                  className="premium-input w-full"
-                  placeholder="your@email.com"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2 text-accent">Phone *</label>
-                <input
-                  type="tel"
-                  value={userDetails.phone}
-                  onChange={(e) => setUserDetails({...userDetails, phone: e.target.value})}
-                  className="premium-input w-full"
-                  placeholder="(555) 123-4567"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2 text-accent">Additional Message</label>
-                <textarea
-                  value={userDetails.message}
-                  onChange={(e) => setUserDetails({...userDetails, message: e.target.value})}
-                  rows="3"
-                  className="premium-input w-full"
-                  placeholder="Any special requirements or questions..."
-                />
-              </div>
-
-              <div className="flex space-x-3 pt-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowBookingForm(false);
-                    setSelectedPackage(null);
-                  }}
-                  className="flex-1 py-3 border border-accent text-accent rounded-lg hover:bg-accent hover:text-black transition-all duration-300"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 py-3 bg-accent text-black rounded-lg hover:bg-accent-dark transition-all duration-300 flex items-center justify-center space-x-2"
-                >
-                  <Mail className="h-4 w-4" />
-                  <span>Send Booking</span>
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       )}
