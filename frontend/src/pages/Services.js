@@ -53,7 +53,7 @@ const Services = () => {
       id: 'commercial',
       title: 'Commercial Photography',
       description: 'Premium commercial photography for products, brands, and corporate campaigns.',
-      price: 'From $2,000',
+      price: 'From 2,000',
       duration: 'Full day',
       features: [
         'Product and brand photography',
@@ -69,7 +69,7 @@ const Services = () => {
       id: 'wedding',
       title: 'Wedding Photography',
       description: 'Complete wedding coverage capturing every precious moment of your special day.',
-      price: 'From $3,000',
+      price: 'From 3,000',
       duration: 'Full day',
       features: [
         '8+ hours coverage',
@@ -85,7 +85,7 @@ const Services = () => {
       id: 'event',
       title: 'Event Photography',
       description: 'Professional event coverage for corporate functions, parties, and special occasions.',
-      price: 'From $1,000',
+      price: 'From 1,000',
       duration: '4-8 hours',
       features: [
         'On-site printing available',
@@ -101,7 +101,7 @@ const Services = () => {
       id: 'headshot',
       title: 'Professional Headshots',
       description: 'Corporate and professional headshots for LinkedIn, websites, and business profiles.',
-      price: 'From $300',
+      price: 'From 300',
       duration: '1 hour',
       features: [
         'Multiple outfit changes',
@@ -118,20 +118,19 @@ const Services = () => {
   const packages = [
     {
       name: 'Essential',
-      price: '$300',
+      price: '300',
       duration: '1 Hour',
       features: [
-        'Professional consultation',
+        'Quick session',
         '10 edited photos',
         'Basic retouching',
-        'Online gallery',
         'Digital delivery'
       ],
       recommended: false
     },
     {
-      name: 'Premium',
-      price: '$800',
+      name: 'Premium Package',
+      price: '800',
       duration: '3 Hours',
       features: [
         'Extended session',
@@ -144,14 +143,13 @@ const Services = () => {
       recommended: true
     },
     {
-      name: 'Luxury',
-      price: '$2,500',
+      name: 'Luxury Package',
+      price: '2,500',
       duration: 'Full Day',
       features: [
-        'Unlimited coverage',
-        '100+ edited photos',
-        'Premium retouching',
-        'Priority delivery',
+        'Unlimited photos',
+        '50+ edited photos',
+        'Professional retouching',
         'Album included',
         'Second photographer',
         'Location options'

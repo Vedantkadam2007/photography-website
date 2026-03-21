@@ -78,10 +78,10 @@ const Contact = () => {
   };
 
   const services = [
-    { value: 'portrait', label: 'Portrait Photography', price: 'From $500' },
-    { value: 'event', label: 'Event Coverage', price: 'From $1,500' },
-    { value: 'commercial', label: 'Commercial Photography', price: 'From $2,000' },
-    { value: 'wedding', label: 'Wedding Photography', price: 'From $3,000' },
+    { value: 'portrait', label: 'Portrait Photography', price: 'From 500' },
+    { value: 'event', label: 'Event Coverage', price: 'From 1,500' },
+    { value: 'commercial', label: 'Commercial Photography', price: 'From 2,000' },
+    { value: 'wedding', label: 'Wedding Photography', price: 'From 3,000' },
   ];
 
   return (
@@ -116,7 +116,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Phone</h3>
-                    <p className="text-gray-400">+1 (555) 123-4567</p>
+                    <p className="text-gray-400">8262958953</p>
                     <p className="text-gray-500 text-sm">Mon-Fri: 9AM-6PM</p>
                   </div>
                 </div>

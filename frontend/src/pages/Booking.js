@@ -21,10 +21,10 @@ const Booking = () => {
   React.useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const service = urlParams.get('service');
-    const packageName = urlParams.get('package');
+    const package = urlParams.get('package');
     
     if (service) setFormData(prev => ({ ...prev, serviceType: service }));
-    if (packageName) setFormData(prev => ({ ...prev, packageName: packageName }));
+    if (package) setFormData(prev => ({ ...prev, packageName: package }));
   }, []);
 
   const handleChange = (e) => {

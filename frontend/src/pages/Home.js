@@ -69,19 +69,19 @@ const Home = () => {
                 icon: Camera,
                 title: 'Portrait Photography',
                 description: 'Professional portraits that capture your unique personality and essence.',
-                price: 'From $500'
+                price: 'From 500'
               },
               {
                 icon: ImageIcon,
                 title: 'Event Coverage',
                 description: 'Comprehensive event photography with artistic vision and technical excellence.',
-                price: 'From $1,500'
+                price: 'From 1,500'
               },
               {
                 icon: Star,
                 title: 'Commercial Photography',
                 description: 'High-end commercial photography for brands and businesses.',
-                price: 'From $2,000'
+                price: 'From 2,000'
               }
             ].map((service, index) => (
               <div key={index} className="premium-card p-8 rounded-2xl expensive-card-bg">
